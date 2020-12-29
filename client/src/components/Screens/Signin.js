@@ -1,8 +1,10 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import {Link,useHistory} from "react-router-dom";
-import M from 'materialize-css'
+import {UserContext} from "../../App"
+import M from 'materialize-css';
 
 function Signin(){
+    const {state, dispatch} = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
@@ -21,10 +23,12 @@ function Signin(){
           .then(data=> {
             if(data.error){
                 console.log(data);
-                M.toast({html: data.error.message,classes:"#c62828 red darken-3"})
+                M.toast({html: data.error.message,classes:"#c62828 red darken-3"});
              }else{
-                 console.log(data);
-                M.toast({html:"signed successfully",classes:"#43a047 green darken-1"})
+                localStorage.setItem("jwt", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
+                dispatch({type:"USER", payload:data.user});
+                M.toast({html:"signed successfully",classes:"#43a047 green darken-1"});
                 history.push('/');
             }
           }).catch((error)=> console.log(error));          

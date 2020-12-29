@@ -5,24 +5,24 @@ const verify = require("../middleware/verifyToken");
 const router = express.Router();
 const Post = require("../models/post");
 
-router.post("/createpost", verify, async (req,res)=>{
-    const {title, body, imageUrl} = req.body
-    if(!title || !body || !imageUrl){
-        return res.status(422).json({error:"add all the field"});
-    };
-    console.log(req.user._id);
+router.post('/createpost', verify, (req,res)=>{
+    const {title,body,pic} = req.body 
+    if(!title || !body || !pic){
+      return  res.status(422).json({error:"Plase add all the fields"})
+    }
+
     const post = new Post({
         title,
         body,
-        imageUrl,
-        postedBy:req.user._id
+        photo:pic,
+        postedBy:req.user
     })
-    try {
-        await post.save();
-        res.status(200).json({message:"user posted successfully"});
-    } catch (error) {
-        res.status(400).json({error})
-    }
+    post.save().then(result=>{
+        res.json({post:result})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 })
 
 router.get("/allpost", async (req,res)=>{

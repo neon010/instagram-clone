@@ -1,30 +1,21 @@
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import {Link,useHistory} from "react-router-dom";
 import M from 'materialize-css'
 
 function CreatePost(){
-    const history = useHistory();
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
-    const [image, setImage] = useState("");
-    const [url, setUrl] = useState("")
+    const history = useHistory()
+    const [title,setTitle] = useState("")
+    const [body,setBody] = useState("")
+    const [image,setImage] = useState("")
+    const [url,setUrl] = useState("")
 
-    const postDetails = () =>{
-        const data = new FormData();
-        data.append("file", image);
-        data.append("upload_preset", "insta-clone");
-        data.append("cloud_name", "mycloud213");
-        fetch("https://api.cloudinary.com/v1_1/mycloud213/image/upload",{
-            method:"post",
-            body:data
-        }).then(res=>res.json())
-        .then(data=>setUrl(data.url))
-        .catch((error)=> console.log(error));
-
-        fetch("/createpost", {
+    useEffect(()=>{
+       if(url){
+        fetch("/createpost",{
             method:"post",
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                "Auth-token": localStorage.getItem("jwt")
             },
             body:JSON.stringify({
                 title,
@@ -32,16 +23,37 @@ function CreatePost(){
                 pic:url
             })
         }).then(res=>res.json())
-          .then(data=> {
-            if(data.error){
-                M.toast({html: data.error,classes:"#c62828 red darken-3"})
-             }else{
-                M.toast({html:"posted successfully",classes:"#43a047 green darken-1"})
-                history.push('/');
-            }
-          }).catch((error)=> console.log(error));          
-
+        .then(data=>{   
+           if(data.error){
+              M.toast({html: data.error.message, classes:"#c62828 red darken-3"})
+           }
+           else{
+               M.toast({html:"Created post Successfully",classes:"#43a047 green darken-1"})
+               history.push('/')
+           }
+        }).catch(err=>{
+            console.log(err)
+        })
     }
+    },[url])
+  
+   const postDetails = ()=>{
+       const data = new FormData()
+       data.append("file",image)
+       data.append("upload_preset","insta-clone")
+       data.append("cloud_name","mycloud213")
+       fetch("https://api.cloudinary.com/v1_1/mycloud213/image/upload",{
+           method:"post",
+           body:data
+       })
+       .then(res=>res.json())
+       .then(data=>{
+          setUrl(data.url)
+       })
+       .catch(err=>{
+           console.log(err)
+       })    
+   }
 
 
     return (
