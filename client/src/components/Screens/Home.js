@@ -1,57 +1,39 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 
 function Home(){
+    const [data,setData] = useState([]);
+
+    useEffect(()=>{
+        fetch("/allpost", {
+            headers:{
+                "auth-token": localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+            .then(result=>{
+                console.log(result);
+                setData(result);
+            })
+    },[])
+
     return (
         <div className="home">
-            <div className="card home-card">
-                <h5>priyanka</h5>
-                <div className="card-image">
-                    <img className="img" 
-                    src="https://images.unsplash.com/photo-1599065286449-b984d8ac7e4e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80"/>
-                </div>
-                <div className="card-content">
-                    <i className="material-icons">favorite</i>
-                    <h6>title</h6>
-                    <p>This is post</p>
-                    <input type="text" placeholder="Enter your comment"/>
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>priyanka</h5>
-                <div className="card-image">
-                    <img className="img" 
-                    src="https://images.unsplash.com/photo-1599065286449-b984d8ac7e4e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80"/>
-                </div>
-                <div className="card-content">
-                    <h6>title</h6>
-                    <p>This is post</p>
-                    <input type="text" placeholder="Enter your comment"/>
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>priyanka</h5>
-                <div className="card-image">
-                    <img className="img" 
-                    src="https://images.unsplash.com/photo-1599065286449-b984d8ac7e4e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80"/>
-                </div>
-                <div className="card-content">
-                    <h6>title</h6>
-                    <p>This is post</p>
-                    <input type="text" placeholder="Enter your comment"/>
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>priyanka</h5>
-                <div className="card-image">
-                    <img className="img" 
-                    src="https://images.unsplash.com/photo-1599065286449-b984d8ac7e4e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80"/>
-                </div>
-                <div className="card-content">
-                    <h6>title</h6>
-                    <p>This is post</p>
-                    <input type="text" placeholder="Enter your comment"/>
-                </div>
-            </div>
+            {data.map(item=> {
+                return (
+                    <div className="card home-card" key={item._id}>
+                        <h5>{item.postedBy.name}</h5>
+                        <div className="card-image">
+                            <img className="img" 
+                                src={item.photo} alt="post image"/>
+                        </div>
+                        <div className="card-content">
+                            <i className="material-icons" style={{color: "red"}}> favorite</i>
+                            <h6>{item.title}</h6>
+                            <p>{item.body}</p>
+                            <input type="text" placeholder="Enter your comment"/>
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     )
 };

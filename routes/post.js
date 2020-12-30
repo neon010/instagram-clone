@@ -25,7 +25,7 @@ router.post('/createpost', verify, (req,res)=>{
     })
 })
 
-router.get("/allpost", async (req,res)=>{
+router.get("/allpost", verify, async (req,res)=>{
     try {
         const allPost = await Post.find().populate("postedBy", "_id name");
         res.status(200).json(allPost);
