@@ -24,9 +24,9 @@ function Signup(){
           .then(data=> {
             if(data.error){
                 console.log(data);
-                M.toast({html: data.error.message,classes:"#c62828 red darken-3"})
+                M.toast({html: data.error.message, classes:"#c62828 red darken-3"})
              }else{
-                M.toast({html:data.message,classes:"#43a047 green darken-1"})
+                M.toast({html:data.message, classes:"#43a047 green darken-1"})
                 history.push('/signin');
             }
           }).catch((error)=> console.log(error));

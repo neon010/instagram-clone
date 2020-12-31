@@ -8,6 +8,7 @@ import Signup from "./components/Screens/Signup";
 import Profile from "./components/Screens/Profile";
 import CreatePost from "./components/Screens/createPost";
 import {reducer, initialState} from "./reducers/userReducer"
+import UserProfile from "./components/Screens/UserProfile";
 
 
 export const UserContext = createContext();
@@ -20,7 +21,6 @@ const Routing = () =>{
     const user = JSON.parse(localStorage.getItem("user"));
     if(user){
       dispatch({type:"USER", payload:user});
-      history.push("/")
     }else{
       history.push("/signin");
     }
@@ -33,6 +33,7 @@ const Routing = () =>{
       <Route path="/signup" exact component={Signup}/>
       <Route path="/profile" exact component={Profile}/>
       <Route path="/createPost" exact component={CreatePost}/>
+      <Route path="/profile/:userid"  component={UserProfile}/>
     </Switch>
   )
 }
