@@ -30,10 +30,11 @@ function Profile(){
                 </div>
                 <div>
                     <h4>{state? state.name : "loading"}</h4>
+                    <h4>{state? state.email : "loading"}</h4>
                     <div style={{display:"flex", justifyContent:"space-between", width:"108%"}}>
-                        <h4>40 post</h4>
-                        <h4>50 following</h4>
-                        <h4>60 followers</h4>
+                        <h6>{myPost.length} posts</h6>
+                        <h6>{state?state.followers.length:"0"} followers</h6>
+                        <h6>{state?state.following.length:"0"} following</h6>
                     </div>
                 </div>
             </div>
