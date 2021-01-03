@@ -7,12 +7,12 @@ function UserProfile(){
     const {state,dispatch} = useContext(UserContext);
     const [userProfile,setProfile] = useState(null);
     const {userid} = useParams();
-    const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true);
-    console.log(userProfile);
+    const [showfollow,setShowFollow] = useState(state.following ? !state.following.includes(userid):true);
+    
     useEffect(()=>{
         fetch(`/user/${userid}`,{
             headers:{
-                "Auth-token":localStorage.getItem("jwt")
+                "auth-token": localStorage.getItem("jwt")
             }
         }).then(res=>res.json())
         .then(result=>{          
@@ -25,15 +25,14 @@ function UserProfile(){
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Auth-token":localStorage.getItem('jwt')
+                "auth-token":localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 followId:userid
             })
         }).then(res=>res.json())
-        .then(data=>{
-        
-            dispatch({type:"UPDATE",payload:{following:data.following,followers:data.followers}})
+        .then(data=>{        
+            dispatch({type:"UPDATE", payload:{following:data.following,followers:data.followers}})
              localStorage.setItem("user",JSON.stringify(data))
              setProfile((prevState)=>{
                  return {
@@ -52,7 +51,7 @@ function UserProfile(){
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Auth-token":localStorage.getItem('jwt')
+                "auth-token":localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 unfollowId:userid
@@ -64,7 +63,7 @@ function UserProfile(){
              localStorage.setItem("user",JSON.stringify(data))
             
              setProfile((prevState)=>{
-                const newFollower = prevState.user.followers.filter(item=>item != data._id )
+                const newFollower = prevState.user.followers.filter(item=>item !== data._id )
                  return {
                      ...prevState,
                      user:{

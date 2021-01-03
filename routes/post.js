@@ -27,12 +27,19 @@ router.post('/createpost', verify, (req,res)=>{
 
 router.get("/allpost", verify, async (req,res)=>{
     try {
-        const allPost = await Post.find().populate("postedBy", "_id name");
+        const allPost = await Post.find().populate("postedBy", "_id name email pic");
         res.status(200).json(allPost);
     } catch (error) {
         console.log(error);
     };
 });
+
+router.get('/getsubpost',verify,(req,res)=>{
+
+    // if postedBy in following
+    Post.find({postedBy:{$in:req.user.following}}).populate("postedBy").then(posts=>{res.status(200).json(posts)
+    }).catch(err=>{ console.log(err)})
+})
 
 router.get("/mypost", verify, async (req,res)=>{
     try {

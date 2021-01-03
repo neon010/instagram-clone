@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function Home(){
     const [data,setData] = useState([]);
-    const {state,dispatch} = useContext(UserContext);
+    const {state} = useContext(UserContext);
 
 
     useEffect(()=>{
@@ -24,16 +24,15 @@ function Home(){
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Auth-token": localStorage.getItem("jwt")
+                "auth-token": localStorage.getItem("jwt")
             },
             body:JSON.stringify({
                 postId:id
             })
         }).then(res=>res.json())
         .then(result=>{
-                 //   console.log(result)
           const newData = data.map(item=>{
-              if(item._id==result._id){
+              if(item._id === result._id){
                   return result
               }else{
                   return item
@@ -49,16 +48,15 @@ function Home(){
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Auth-token":localStorage.getItem("jwt")
+                "auth-token":localStorage.getItem("jwt")
             },
             body:JSON.stringify({
                 postId:id
             })
         }).then(res=>res.json())
         .then(result=>{
-        //   console.log(result)
         const newData = data.map(item=>{
-            if(item._id==result._id){
+            if(item._id === result._id){
                 return result
             }else{
                 return item
@@ -74,7 +72,7 @@ const makeComment = (text,postId)=>{
         method:"put",
         headers:{
             "Content-Type":"application/json",
-            "Auth-token":localStorage.getItem("jwt")
+            "auth-token": localStorage.getItem("jwt")
         },
         body:JSON.stringify({
             postId,
@@ -82,9 +80,8 @@ const makeComment = (text,postId)=>{
         })
     }).then(res=>res.json())
     .then(result=>{
-        console.log(result)
         const newData = data.map(item=>{
-          if(item._id==result._id){
+          if(item._id === result._id){
               return result
           }else{
               return item
@@ -119,7 +116,7 @@ const deletePost = (postid)=>{
                     <div className="card home-card" key={item._id}>
                             <h5 style={{padding:"5px"}}>
                                 <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}` : "/profile" }>
-                                    {item.postedBy.name}
+                                    <img src={item.postedBy.pic} alt="profile-pic" className="avatar" style={{marginRight:"10px"}}/>{item.postedBy.name}
                                 </Link> {item.postedBy._id === state._id 
                             && <i className="material-icons" style={{
                                 float:"right"
@@ -134,7 +131,6 @@ const deletePost = (postid)=>{
                                 src={item.photo} alt="post image"/>
                         </div>
                         <div className="card-content">
-                            <i className="material-icons" style={{color: "red"}}> favorite</i>
                             {item.likes.includes(state._id)
                             ? 
                              <i className="material-icons"

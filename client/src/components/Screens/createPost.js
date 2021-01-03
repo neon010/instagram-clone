@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react"
-import {Link,useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import M from 'materialize-css'
 
 function CreatePost(){
@@ -15,7 +15,7 @@ function CreatePost(){
             method:"post",
             headers:{
                 "Content-Type":"application/json",
-                "Auth-token": localStorage.getItem("jwt")
+                "auth-token": localStorage.getItem("jwt")
             },
             body:JSON.stringify({
                 title,

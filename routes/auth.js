@@ -9,7 +9,7 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/signup", async(req,res)=>{
-    const {name,email,password} = req.body;
+    const {name, email, password, pic} = req.body;
 
     //checking if user with the same password exist in db
     const emailExist = await User.findOne({email});
@@ -25,7 +25,8 @@ router.post("/signup", async(req,res)=>{
     const user = new User({
         name,
         email,
-        password:hashedPassword
+        password:hashedPassword,
+        pic
     });
     try {
         await user.save();
@@ -60,6 +61,8 @@ router.post("/signin", async (req,res)=>{
     }
 
 })
+
+
 
 
 
