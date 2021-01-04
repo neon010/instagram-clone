@@ -23,7 +23,9 @@ a{
 .item{
   width:30%;
 }
-
+.home{
+  margin-top: 40px;
+}
 .home-card{
   max-width: 640px;
   height: max-content;

@@ -48,12 +48,14 @@ function Signin(){
                 <div className="card auth-card">
                     <h1 className="login-title">Instagram</h1>
                     <input 
+                    required
                     type="text" 
                     placeholder="Email"
                     value={email}
                     onChange={(event)=>setEmail(event.target.value)}
                     />
                     <input 
+                    required
                     type="password" 
                     placeholder="Password"
                     value={password}

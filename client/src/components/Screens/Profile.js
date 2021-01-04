@@ -67,7 +67,7 @@ function Profile(){
                 <div>
                     <img 
                     style={{width:"160px", height:"160px", borderRadius:"50%"}}
-                    src= {state.pic ? state.pic:"https://res.cloudinary.com/mycloud213/image/upload/v1609481336/default_men_image_fvwyfl.png"}
+                    src= {state? state.pic:"https://res.cloudinary.com/mycloud213/image/upload/v1609481336/default_men_image_fvwyfl.png"}
                     />
                     <div  className="file-field input-field" style={{margin:"10px"}}>
                         <div className="btn #64b5f6 blue darken-1">

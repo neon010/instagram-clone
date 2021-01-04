@@ -32,11 +32,11 @@ function Navbar(){
     const renderList = () => {
       if (state) {
         return [
-          <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
+          <li key="1" style={{marginRight:"250px"}}><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
           <li key="hghmbjm"><Link to="/"><i className="large material-icons">home</i></Link></li>,
           <li key="2">
             <Link to="/profile">
-              <img src={state.pic} alt="profile-pic" className="avatar"/>
+              <img src={state ? state.pic: "https://res.cloudinary.com/mycloud213/image/upload/v1609481336/default_men_image_fvwyfl.png"} alt="profile-pic" className="avatar"/>
             </Link>
           </li>,
           <li key="3"><Link to="/createPost"><i className="large material-icons">add_to_photos</i></Link></li>,
@@ -62,10 +62,10 @@ function Navbar(){
     return (
         <nav>
         <div className="nav-wrapper white nav-custom">
-          <div style={{marginLeft:"20px"}}>
+          <div style={{marginLeft:"150px"}}>
             <Link to={state?"/":"/signin"} className="brand-logo left">Instagram</Link>
           </div>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <ul id="nav-mobile" className="right hide-on-med-and-down" style={{marginRight:"30px"}}>
             {renderList()}
           </ul>
         </div>

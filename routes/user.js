@@ -1,3 +1,4 @@
+const { compareSync } = require("bcryptjs");
 const express = require("express");
 const mongoose = require("mongoose");
 const verify = require("../middleware/verifyToken");
@@ -77,6 +78,8 @@ router.put('/updatepic',verify,(req,res)=>{
          res.json(result)
     })
 });
+
+
 
 router.post('/search-users', verify, async (req,res)=>{
     let userPattern = new RegExp("^"+req.body.query);

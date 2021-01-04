@@ -66,12 +66,14 @@ function CreatePost(){
         }}>
             <input 
             type="text"
+            required
             placeholder="title"
             value={title}
             onChange={(event)=>{setTitle(event.target.value)}}
             />
            <input
             type="text"
+            required
             placeholder="body"
             value={body}
             onChange={(event)=>{setBody(event.target.value)}}
@@ -81,6 +83,7 @@ function CreatePost(){
                 <span>Uplaod Image</span>
                 <input 
                 type="file"
+                required
                 onChange={(event)=>{setImage(event.target.files[0])}}
                 />
             </div>

@@ -6,9 +6,9 @@ const router = express.Router();
 const Post = require("../models/post");
 
 router.post('/createpost', verify, async (req,res)=>{
-    const {title,body,pic} = req.body 
+    const {title,body,pic} = req.body;
     if(!title || !body || !pic){
-      return  res.status(422).json({error:"Plase add all the fields"})
+      return  res.status(422).json({error:"Plase add all the fields"});
     }
 
     const post = new Post({

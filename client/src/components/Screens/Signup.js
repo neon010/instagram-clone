@@ -79,12 +79,14 @@ function Signup(){
             <h2 className="login-title">Instagram</h2>
             <input
             type="text"
+            required
             placeholder="Name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
             />
             <input
             type="text"
+            required
             placeholder="Email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
@@ -92,6 +94,7 @@ function Signup(){
             <input
             type="password"
             placeholder="Password"
+            required
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
             />
