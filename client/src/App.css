@@ -87,3 +87,18 @@ a{
   height: 50px;
   border-radius: 50%;
 }
+.signin-signup-link{
+  text-decoration:underline; 
+  text-decoration-color: red !important;
+}
+.nav-custom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal{
+  width:350px;
+}
+.collection-item{
+  width: 100%;
+}

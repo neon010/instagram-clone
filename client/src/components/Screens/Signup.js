@@ -76,22 +76,22 @@ function Signup(){
    return (
       <div className="mycard">
           <div className="card auth-card input-field">
-            <h2>Instagram</h2>
+            <h2 className="login-title">Instagram</h2>
             <input
             type="text"
-            placeholder="name"
+            placeholder="Name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
             />
             <input
             type="text"
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
             />
             <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
             />
@@ -109,7 +109,7 @@ function Signup(){
             >
                 SignUP
             </button>
-            <h5>
+            <h5 className="signin-signup-link">
                 <Link to="/signin">Already have an account ?</Link>
             </h5>
              

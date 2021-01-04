@@ -37,20 +37,25 @@ function Signin(){
     return (
         <>
             <div>
-                Instagram
+                <div>
+                    <img src="" alt=""/>
+                </div>
+                <div>
+                    <img src="" alt=""/>
+                </div>
             </div>
             <div className="login-card">
                 <div className="card auth-card">
                     <h1 className="login-title">Instagram</h1>
                     <input 
                     type="text" 
-                    placeholder="email or username"
+                    placeholder="Email"
                     value={email}
                     onChange={(event)=>setEmail(event.target.value)}
                     />
                     <input 
                     type="password" 
-                    placeholder="password"
+                    placeholder="Password"
                     value={password}
                     onChange={(event)=>setPassword(event.target.value)}
                     />
@@ -60,8 +65,8 @@ function Signin(){
                     >
                         Login
                     </button>
-                    <h5>
-                        <Link to="/home">Dont have an account?</Link>
+                    <h5 className="signin-signup-link">
+                        <Link to="/signup">Dont have an account?</Link>
                     </h5>
                 </div>
             </div> 

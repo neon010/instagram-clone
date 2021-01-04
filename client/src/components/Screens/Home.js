@@ -115,7 +115,7 @@ const deletePost = (postid)=>{
                 return (
                     <div className="card home-card" key={item._id}>
                             <h5 style={{padding:"5px"}}>
-                                <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}` : "/profile" }>
+                                <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}` : "/profile"}>
                                     <img src={item.postedBy.pic} alt="profile-pic" className="avatar" style={{marginRight:"10px"}}/>{item.postedBy.name}
                                 </Link> {item.postedBy._id === state._id 
                             && <i className="material-icons" style={{

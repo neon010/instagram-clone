@@ -75,7 +75,6 @@ function UserProfile(){
              setShowFollow(true);             
         })
     }
-
     return (
         <>
         {userProfile ?

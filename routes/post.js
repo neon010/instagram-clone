@@ -5,7 +5,7 @@ const verify = require("../middleware/verifyToken");
 const router = express.Router();
 const Post = require("../models/post");
 
-router.post('/createpost', verify, (req,res)=>{
+router.post('/createpost', verify, async (req,res)=>{
     const {title,body,pic} = req.body 
     if(!title || !body || !pic){
       return  res.status(422).json({error:"Plase add all the fields"})
@@ -16,29 +16,33 @@ router.post('/createpost', verify, (req,res)=>{
         body,
         photo:pic,
         postedBy:req.user
-    })
-    post.save().then(result=>{
-        res.json({post:result})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+    });
+
+    try {
+        const result = await post.save();
+        res.status(200).json({post:result});
+    } catch (error) {
+        console.log(error);
+    };
+
 })
 
 router.get("/allpost", verify, async (req,res)=>{
     try {
-        const allPost = await Post.find().populate("postedBy", "_id name email pic");
+        const allPost = await Post.find().populate("postedBy", "_id name email pic").sort("-createdAt");
         res.status(200).json(allPost);
     } catch (error) {
         console.log(error);
     };
 });
 
-router.get('/getsubpost',verify,(req,res)=>{
-
-    // if postedBy in following
-    Post.find({postedBy:{$in:req.user.following}}).populate("postedBy").then(posts=>{res.status(200).json(posts)
-    }).catch(err=>{ console.log(err)})
+router.get('/getsubpost',verify, async (req,res)=>{
+    try {
+        const myFollowingPost = await Post.find().populate("postedBy", "_id name email pic");
+        res.status(200).json(myFollowingPost);
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 router.get("/mypost", verify, async (req,res)=>{
@@ -50,7 +54,7 @@ router.get("/mypost", verify, async (req,res)=>{
     }
 })
 
-router.put("/like", verify, (req,res)=>{
+router.put("/like", verify,  (req,res)=>{
     Post.findByIdAndUpdate(req.body.postId, {
         $push:{likes:req.user._id}
     },{
@@ -117,4 +121,5 @@ router.delete('/deletepost/:postId',verify,(req,res)=>{
     })
 })
 
-module.exports = router
+
+module.exports = router;

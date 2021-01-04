@@ -76,6 +76,16 @@ router.put('/updatepic',verify,(req,res)=>{
          }
          res.json(result)
     })
-})
+});
+
+router.post('/search-users', verify, async (req,res)=>{
+    let userPattern = new RegExp("^"+req.body.query);
+    try {
+        const user = await User.find({email:{$regex:userPattern}}).select("_id name pic");
+        res.status(200).json({user})
+    } catch (error) {
+        console.log(error)
+    }
+});
 
 module.exports = router
