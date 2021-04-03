@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+a{
+  color: black !important;
+}
+
+.brand-logo{
+  font-family: 'Grand Hotel', cursive;
+}
+.login-title{
+  font-family: 'Grand Hotel', cursive;
+}
+.auth-card{
+  padding: 20px;
+  text-align: center;
+  max-width:350px;
+  margin: 10px auto;
+}
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.item{
+  width:30%;
+}
+.home{
+  margin-top: 40px;
+}
+.home-card{
+  max-width: 640px;
+  height: max-content;
+  margin: 26px auto;
+}
+.upload-photo{
+  color:blue;
+  width:100%;
+  height:55px;
+  border:none; 
+  font-Weight:700; 
+  background:none; 
+  border-Bottom:1px solid grey;
+}
+.remove-photo{
+  width:100%; 
+  height:55px; 
+  color:red; 
+  border:none; 
+  font-Weight:700; 
+  background:none;
+  border-Bottom:1px solid grey;
+}
+.show-modal{
+  width:100%;
+  height:55px; 
+  border:none; 
+  background:none; 
+  font-Weight:700; 
+  border-Bottom:1px solid grey;
+}
+
+.upload-file-input{
+  color: transparent !important;
+}
+.upload-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.upload-file-input::before{
+  content: 'upload profile photo';
+  color: blue;
+  font-weight: 700;
+  border: transparent !important;
+  outline: none !important;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upload-file-input-input:hover::before {
+  border-color: transparent;
+}
+.upload-file-input:active::after {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  border: transparent;
+  outline: none;
+}
+.avatar{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.signin-signup-link{
+  text-decoration:underline; 
+  text-decoration-color: red !important;
+}
+.nav-custom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal{
+  width:350px;
+}
+.collection-item{
+  width: 100%;
+}
